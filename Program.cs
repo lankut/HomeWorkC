@@ -20,18 +20,22 @@ else
 //Задача 13: Напишите программу, которая выводит
 //третью цифру заданного числа или сообщает, что третьей цифры нет.
 
+int Add(int number)
+{   while(number>999)
+        number = number/10;
+        number = number%10;
+    return number;
+}        
+       
 Console.Write("Для вывода третьего символа любого числа, прошу наваяйте какое-нить число: ");
-int number = Convert.ToInt32(Console.ReadLine());
-int res = 0;
-while (number>999)
+int num = Convert.ToInt32(Console.ReadLine());
+if (num > 99)
 {
-    number = number/10;
-    res = number%10;
+    int dd = Add(num);    
+    Console.WriteLine(dd);
 }
-if (number<=99)
-    Console.WriteLine("Третьего числа не существует");
 else 
-    Console.WriteLine(res);
+    Console.WriteLine("Третьей цифры нет.");
 
 //Задача 15: Напишите программу, которая принимает на вход цифру,
 //обозначающую день недели, и проверяет, является ли этот день выходным.
