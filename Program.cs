@@ -1,70 +1,65 @@
-﻿﻿//Задача 19 Напишите программу, которая принимает на вход пятизначное число
-// и проверяет, является ли оно палиндромом.
+﻿﻿// Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
 
-void Palindrom (int num)
+int Exponentiation(int num, int degree)
 {
-    
-    if (num > 9999 && num < 100000)
+    int res = num;
+    for (int i = 1; i < degree; i++)
     {
-        int num1 = num % 100;
-        int num2 = num / 1000;
-        int num3 = num1 % 10;
-        int num4 = num2 /10;   
-        int num5 = num1 / 10;
-        int num6 = num2 % 10;
+        res=res*num;
+    }
+   return res;
+}
 
-        if (num3 == num4 && num5 == num6)
+Console.WriteLine("Введите число: ");
+int num = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Введите в какую степень возвести число: ");
+int degree = Convert.ToInt32(Console.ReadLine());
+
+int result = Exponentiation(num, degree);   
+
+if (degree>0)
+{
+    Console.WriteLine(result);    
+}
+else 
+    Console.WriteLine("Число возведения в степень не натуральное!");
+
+// Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
+
+int NumSumm(int number)
+{
+    int result = 0;
+    while (number !=0)
         {
-            Console.WriteLine("Число является палиндромом");  
+            result = result + number%10;
+            number = number/10;
         }
-        else Console.WriteLine ("Число не является палиндромом");
-    }
-    else Console.WriteLine ("Число не соответствует пятизначному");
+        return result;
 }
 
-Console.Write("Введите пятизначное число: ");
-int res = Convert.ToInt32(Console.ReadLine());
-Palindrom(res);
+Console.Write("Введите число для подсчета суммы: ");
+int num = Convert.ToInt32(Console.ReadLine());
 
-// Задача 21 Напишите программу, которая принимает на вход координаты двух
-// точек и находит расстояние между ними в 3D пространстве.
+int num1 = NumSumm(num);
+Console.WriteLine($"Сумма чисел входящих в число {num} равняется {num1}");
 
-double Lenth(double xa, double ya, double za, double xb, double yb, double zb)
+// Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
+
+int[] Array(int size)
 {
-    double lenth = Math.Sqrt((yb-ya)*(yb-ya)+(xb-xa)*(xb-xa)+(zb-za)*(zb-za));
-    return lenth;
+    int[] newArray = new int[size];
+    for (int i = 0; i < size; i++)
+        newArray[i] = new Random().Next(-100, 100);
+    return newArray;
 }
 
-Console.Write("Введите координаты Х точки А: ");
-int xa = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите координаты Y точки А: ");
-int ya = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите координаты Z точки А: ");
-int za = Convert.ToInt32(Console.ReadLine());
-
-Console.Write("Введите координаты Х точки B: ");
-int xb = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите координаты Y точки B: ");
-int yb = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите координаты Z точки B: ");
-int zb = Convert.ToInt32(Console.ReadLine());
-
-double res = Lenth(xa, ya, za, xb, yb, zb);
-Console.WriteLine($"Расстояние между точками АВ равняется {res}");
-
-//Задача 23 Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
-
-int Progr(int num)
+void ShowArray(int[] array)
 {
-    int start = 1;
-    while (start <= num)
-    {
-        Console.WriteLine(start * start * start);
-        start++;
-    }
-    return start;
+    for (int i = 0; i < array.Length; i++)
+        Console.Write(array[i]+" ");
+    Console.WriteLine();    
 }
 
-Console.Write("Введите число N: ");
-int number = Convert.ToInt32(Console.ReadLine());
-Progr(number);
+int[] num1 = Array(8);
+ShowArray(num1);
