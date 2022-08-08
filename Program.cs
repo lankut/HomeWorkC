@@ -17,12 +17,6 @@ void ShowArray(int[] array)
     Console.WriteLine();    
 }
 
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
-
-int[] array = CreateRandomArray(size);
-ShowArray(array);
-
 int DoubleMass(int[] array)
 {
     int count=0;
@@ -31,6 +25,12 @@ int DoubleMass(int[] array)
         count++;
     return count;
 }
+
+Console.Write("Введите размер массива: ");
+int size = Convert.ToInt32(Console.ReadLine());
+
+int[] array = CreateRandomArray(size);
+ShowArray(array);
 
 int count2 = DoubleMass(array);
 Console.WriteLine($"Количество четных чисел в массиве {count2}");
@@ -53,12 +53,6 @@ void ShowArray(int[] array)
     Console.WriteLine();    
 }
 
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
-
-int[] array = CreateRandomArray(size);
-ShowArray(array);
-
 int Summ(int[] array)
 {
     int summ = 0;
@@ -67,6 +61,11 @@ int Summ(int[] array)
     return summ;
 }
 
+Console.Write("Введите размер массива: ");
+int size = Convert.ToInt32(Console.ReadLine());
+
+int[] array = CreateRandomArray(size);
+ShowArray(array);
 
 int count2 = Summ(array);
 Console.WriteLine($"Сумма нечетных индексов массива равна {count2}");
@@ -89,12 +88,6 @@ void ShowArray(int[] array)
     Console.WriteLine();    
 }
 
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
-
-int[] array = CreateRandomArray(size);
-ShowArray(array);
-
 int Find (int[] array)
 {
     int diff = 0;
@@ -109,6 +102,12 @@ int Find (int[] array)
     diff = max - min;
     return diff;
 }
+
+Console.Write("Введите размер массива: ");
+int size = Convert.ToInt32(Console.ReadLine());
+
+int[] array = CreateRandomArray(size);
+ShowArray(array);
 
 int count2 = Find(array);
 Console.WriteLine($"Разница между максимальным и минимальным числом равна {count2}");
