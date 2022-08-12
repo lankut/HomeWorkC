@@ -1,14 +1,4 @@
-﻿﻿
-// Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу,
-// которая покажет количество чётных чисел в массиве.
-
-int[] CreateRandomArray(int size)
-{
-    int[] newArray = new int[size];
-    for (int i = 0; i < size; i++)
-        newArray[i] = new Random().Next(100, 999);
-    return newArray;
-}
+﻿﻿// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
 
 void ShowArray(int[] array)
 {
@@ -16,98 +6,52 @@ void ShowArray(int[] array)
         Console.Write(array[i]+" ");
     Console.WriteLine();    
 }
-
-int DoubleMass(int[] array)
+   
+int[] InputUser(int size)
 {
-    int count=0;
-    for (int i=0; i<array.Length; i++)
-        if (array[i]%2 == 0)
-        count++;
+    int[] newArray = new int[size];
+    for (int i = 0; i < newArray.Length; i++)
+    {
+        Console.Write($"Введите элемент массива (положительный или отрицательный) под индекcом {i}: ");
+        newArray[i] = Convert.ToInt32(Console.ReadLine());
+    }
+    return newArray;
+}
+
+int Count(int[] array)
+{
+    int count = 0;
+    for (int i = 0; i < array.Length; i++) 
+    {
+        if (array[i]>0) count++;
+    }
     return count;
 }
 
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
+int[] Array = InputUser(4);
 
-int[] array = CreateRandomArray(size);
-ShowArray(array);
+int a = Count(Array);
 
-int count2 = DoubleMass(array);
-Console.WriteLine($"Количество четных чисел в массиве {count2}");
-
-// Задача 36: Задайте одномерный массив, заполненный случайными числами. 
-// Найдите сумму элементов, стоящих на нечётных позициях.
-
-int[] CreateRandomArray(int size)
-{
-    int[] newArray = new int[size];
-    for (int i = 0; i < size; i++)
-        newArray[i] = new Random().Next(10, 99);
-    return newArray;
-}
-
-void ShowArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-        Console.Write(array[i]+" ");
-    Console.WriteLine();    
-}
-
-int Summ(int[] array)
-{
-    int summ = 0;
-    for (int i = 1; i < array.Length; i+=2)
-        summ = summ+array[i];
-    return summ;
-}
-
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
-
-int[] array = CreateRandomArray(size);
-ShowArray(array);
-
-int count2 = Summ(array);
-Console.WriteLine($"Сумма нечетных индексов массива равна {count2}");
+ShowArray(Array);
+Console.WriteLine($"Количество положительных значений массива {a}");
 
 
-// Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
+// Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
+// заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
 
-int[] CreateRandomArray(int size)
-{
-    int[] newArray = new int[size];
-    for (int i = 0; i < size; i++)
-        newArray[i] = new Random().Next(0, 99);
-    return newArray;
-}
+Console.Write("Введите значение b1: ");
+double b1 = Convert.ToDouble(Console.ReadLine());
 
-void ShowArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-        Console.Write(array[i]+" ");
-    Console.WriteLine();    
-}
+Console.Write("Введите значение k1: ");
+double k1 = Convert.ToDouble(Console.ReadLine());
 
-int Find (int[] array)
-{
-    int diff = 0;
-    int min = array[0];
-    int max = array[0];
-    for (int i = 1; i<array.Length; i++)
-        if (min > array[i])
-            min = array[i];
-    for (int i = 1; i<array.Length; i++)
-        if (max < array[i])
-            max = array[i];
-    diff = max - min;
-    return diff;
-}
+Console.Write("Введите значение b2: ");
+double b2 = Convert.ToDouble(Console.ReadLine());
 
-Console.Write("Введите размер массива: ");
-int size = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите значение k2: ");
+double k2 = Convert.ToDouble(Console.ReadLine());
 
-int[] array = CreateRandomArray(size);
-ShowArray(array);
+double x = (b2-b1)/(k1-k2);
+double y = k1*x+b1;
 
-int count2 = Find(array);
-Console.WriteLine($"Разница между максимальным и минимальным числом равна {count2}");
+Console.WriteLine($"Точка пересичения двух прямых {x}, {y}");
