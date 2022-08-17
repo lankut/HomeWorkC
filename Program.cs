@@ -1,57 +1,126 @@
-﻿﻿// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+﻿﻿// Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными
+// числами.
 
-void ShowArray(int[] array)
+double [,] Create2DArray (int m, int n, int minVal, int maxVal)
 {
-    for (int i = 0; i < array.Length; i++)
-        Console.Write(array[i]+" ");
-    Console.WriteLine();    
-}
-   
-int[] InputUser(int size)
-{
-    int[] newArray = new int[size];
-    for (int i = 0; i < newArray.Length; i++)
+    double [,] newArray = new double [m, n];
+    for (int i = 0; i < m; i++)
     {
-        Console.Write($"Введите элемент массива (положительный или отрицательный) под индекcом {i}: ");
-        newArray[i] = Convert.ToInt32(Console.ReadLine());
-    }
+        for (int j = 0; j < n; j++)
+            newArray[i,j] = new Random().Next(minVal, maxVal) + new Random().NextDouble();
+    }    
     return newArray;
 }
 
-int Count(int[] array)
+void Show2DArray(double [,] array)
 {
-    int count = 0;
-    for (int i = 0; i < array.Length; i++) 
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        if (array[i]>0) count++;
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i,j] + " ");
+        }
+        Console.WriteLine();
     }
-    return count;
 }
 
-int[] Array = InputUser(4);
+double [,] array = Create2DArray (5, 5, -13, 13);
+Show2DArray(array); 
 
-int a = Count(Array);
+// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, 
+// и возвращает значение этого элемента или же указание, что такого элемента нет.
 
-ShowArray(Array);
-Console.WriteLine($"Количество положительных значений массива {a}");
+int [,] Create2DArray (int m, int n, int minVal, int maxVal)
+{
+    int [,] newArray = new int [m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            newArray[i,j] = new Random().Next(minVal, maxVal);
+    }    
+    return newArray;
+}
+
+void Show2DArray(int [,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i,j] + " ");
+        }
+        Console.WriteLine();
+    }
+}
+
+void ShowLocation (int [,] array, int x, int y)
+{
+    if (x > array.GetLength(0) || y > array.GetLength(1))   
+                Console.WriteLine("Такого элемента нет");
+    
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (i==x && j==y)
+                Console.WriteLine($"Значение элемента в массиве {array[i,j] }");
+        }
+    }
+}
+
+Console.Write("Введите расположение строки: ");
+int m = Convert.ToInt32(Console.ReadLine());
+
+Console.Write("Введите расположение столбца: ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+int [,] array = Create2DArray (5, 5, 0, 50);
+Show2DArray(array);
+
+ShowLocation(array, m, n);
 
 
-// Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-// заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
+// Задача 52. Задайте двумерный массив из целых чисел. 
+// Найдите среднее арифметическое элементов в каждом столбце.
 
-Console.Write("Введите значение b1: ");
-double b1 = Convert.ToDouble(Console.ReadLine());
+int [,] Create2DArray (int m, int n, int minVal, int maxVal)
+{
+    int [,] newArray = new int [m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            newArray[i,j] = new Random().Next(minVal, maxVal);
+    }    
+    return newArray;
+}
 
-Console.Write("Введите значение k1: ");
-double k1 = Convert.ToDouble(Console.ReadLine());
+void Show2DArray(int [,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i,j] + " ");
+        }
+        Console.WriteLine();
+    }
+}
 
-Console.Write("Введите значение b2: ");
-double b2 = Convert.ToDouble(Console.ReadLine());
+int[,] Average(int[,] array)
+{
+    
+    for (int i = 0; i < array.GetLength(0); i++)
+    { 
+        int sum = 0;
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            sum = sum + array[j,i];
+        }
+        Console.Write($"{sum/array.GetLength(1)} ");
+    }
+    return array;
+}
+int [,] array = Create2DArray (3, 3, 0, 9);
+Show2DArray(array);
 
-Console.Write("Введите значение k2: ");
-double k2 = Convert.ToDouble(Console.ReadLine());
-
-double x = (b2-b1)/(k1-k2);
-double y = k1*x+b1;
-
-Console.WriteLine($"Точка пересичения двух прямых {x}, {y}");
+Average(array);
