@@ -1,126 +1,165 @@
-﻿﻿// Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными
-// числами.
+﻿﻿// Задача 54: Задайте двумерный массив. Напишите программу,
+// которая упорядочит по убыванию элементы каждой строки двумерного массива.
 
-double [,] Create2DArray (int m, int n, int minVal, int maxVal)
+int [,] Create2DArray (int m, int n, int minV, int maxV)
 {
-    double [,] newArray = new double [m, n];
+    int [,] newArray = new int [m,n];
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minVal, maxVal) + new Random().NextDouble();
-    }    
+            newArray[i,j] = new Random().Next(minV, maxV);
+    }
     return newArray;
 }
 
-void Show2DArray(double [,] array)
+int [,] Show2DArray (int [,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i,j] + " ");
-        }
+            Console.Write(array[i,j]+" ");
         Console.WriteLine();
     }
+    Console.WriteLine();
+    return array;
 }
 
-double [,] array = Create2DArray (5, 5, -13, 13);
-Show2DArray(array); 
-
-// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, 
-// и возвращает значение этого элемента или же указание, что такого элемента нет.
-
-int [,] Create2DArray (int m, int n, int minVal, int maxVal)
-{
-    int [,] newArray = new int [m, n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minVal, maxVal);
-    }    
-    return newArray;
-}
-
-void Show2DArray(int [,] array)
+int [,] SortingDown (int [,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        bool sorted = false;
+        while(!sorted)
         {
-            Console.Write(array[i,j] + " ");
+            sorted = true;
+            for (int j = 0; j < array.GetLength(1)-1; j++)
+            {    
+                if (array[i,j]<array[i,j+1]) 
+                {
+                    int temp = array[i,j]; 
+                    array[i,j] = array[i,j+1];
+                    array[i,j+1] = temp; 
+                    sorted = false;            
+                }
+            }
         }
-        Console.WriteLine();
-    }
-}
-
-void ShowLocation (int [,] array, int x, int y)
-{
-    if (x > array.GetLength(0) || y > array.GetLength(1))   
-                Console.WriteLine("Такого элемента нет");
-    
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            if (i==x && j==y)
-                Console.WriteLine($"Значение элемента в массиве {array[i,j] }");
-        }
-    }
-}
-
-Console.Write("Введите расположение строки: ");
-int m = Convert.ToInt32(Console.ReadLine());
-
-Console.Write("Введите расположение столбца: ");
-int n = Convert.ToInt32(Console.ReadLine());
-
-int [,] array = Create2DArray (5, 5, 0, 50);
-Show2DArray(array);
-
-ShowLocation(array, m, n);
-
-
-// Задача 52. Задайте двумерный массив из целых чисел. 
-// Найдите среднее арифметическое элементов в каждом столбце.
-
-int [,] Create2DArray (int m, int n, int minVal, int maxVal)
-{
-    int [,] newArray = new int [m, n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minVal, maxVal);
-    }    
-    return newArray;
-}
-
-void Show2DArray(int [,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i,j] + " ");
-        }
-        Console.WriteLine();
-    }
-}
-
-int[,] Average(int[,] array)
-{
-    
-    for (int i = 0; i < array.GetLength(0); i++)
-    { 
-        int sum = 0;
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            sum = sum + array[j,i];
-        }
-        Console.Write($"{sum/array.GetLength(1)} ");
     }
     return array;
 }
-int [,] array = Create2DArray (3, 3, 0, 9);
-Show2DArray(array);
 
-Average(array);
+
+int [,] mass = Create2DArray(4, 4, 10, 99);
+Show2DArray(mass);
+
+Show2DArray(SortingDown(mass));
+
+// Задача 56: Задайте прямоугольный двумерный массив. 
+// Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+
+int [,] Create2DArray (int m, int n, int minV, int maxV)
+{
+    int [,] newArray = new int [m,n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            newArray[i,j] = new Random().Next(minV, maxV);
+    }
+    return newArray;
+}
+
+int [,] Show2DArray (int [,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i,j]+" ");
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+    return array;
+}
+
+void Find (int [,] array)
+{
+    int imin = 0;
+    int min = 0;
+    int sum = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {    
+            if (i == 0)
+                {    
+                sum = sum + array[i,j];
+                min = min + array[i,j];
+                }
+            else 
+                sum = sum + array[i,j];
+        }            
+        if (sum < min)
+        {
+            min = sum;
+            imin = i;
+        }
+        sum = 0;
+    }
+    
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            if (i == imin)
+            Console.Write(array[i,j]+" ");
+    }    
+}
+
+int [,] mass = Create2DArray(4, 6, 10, 99);
+Show2DArray(mass);
+
+Find(mass);
+
+// Задача 58: Задайте две матрицы. Напишите программу, 
+// которая будет находить произведение двух матриц.
+
+int [,] Create2DArray (int m, int n, int minV, int maxV)
+{
+    int [,] newArray = new int [m,n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            newArray[i,j] = new Random().Next(minV, maxV);
+    }
+    return newArray;
+}
+
+int [,] Show2DArray (int [,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i,j]+" ");
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+    return array;
+}
+
+int [,] Mult (int [,] array1, int [,] array2)
+{
+    int [,] newArray = new int[array1.GetLength(0), array2.GetLength(1)];
+    for (int i = 0; i < array1.GetLength(0); i++)
+    {
+        for (int j = 0; j < array2.GetLength(1); j++)
+        {
+            
+                newArray[i,j] = array1[i,j]*array2[i,j];
+        }
+    }    
+    return newArray;
+}
+
+
+int [,] mass1 = Create2DArray(4, 4, 1, 20);
+int [,] mass2 = Create2DArray(4, 4, 1, 20);
+Show2DArray(mass1);
+Show2DArray(mass2);
+Show2DArray(Mult(mass1, mass2));
