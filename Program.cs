@@ -1,165 +1,70 @@
-﻿﻿// Задача 54: Задайте двумерный массив. Напишите программу,
-// которая упорядочит по убыванию элементы каждой строки двумерного массива.
+﻿﻿// Задача 64: Задайте значения M и N. 
+// Напишите программу, которая выведет все натуральные числа в промежутке от M до N.
 
-int [,] Create2DArray (int m, int n, int minV, int maxV)
+void ShowNums (int m, int n)
 {
-    int [,] newArray = new int [m,n];
-    for (int i = 0; i < m; i++)
+    if (m>n)
     {
-        for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minV, maxV);
+        int temp = n;
+        n = m;
+        m = temp;
     }
-    return newArray;
+    if (n != m) ShowNums(m, n-1);
+    Console.Write(n + " ");
 }
 
-int [,] Show2DArray (int [,] array)
+Console.Write("Введите число M: "); 
+int numM = Convert.ToInt32(Console.ReadLine());
+
+Console.Write("Введите число N: "); 
+int numN = Convert.ToInt32(Console.ReadLine());
+
+ShowNums (numM, numN);
+Console.WriteLine();
+
+// Задача 66: Задайте значения M и N. Напишите программу,
+// которая найдёт сумму натуральных элементов в промежутке от M до N.
+
+int Summ (int m, int n)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+    if (m > n)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i,j]+" ");
-        Console.WriteLine();
+        int temp = n;
+        n = m;
+        m = temp;
     }
-    Console.WriteLine();
-    return array;
+    if (n != m) return n + Summ(m, n - 1);
+    return n;
 }
 
-int [,] SortingDown (int [,] array)
+Console.Write("Введите число M: "); 
+int numM = Convert.ToInt32(Console.ReadLine());
+
+Console.Write("Введите число N: "); 
+int numN = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine(Summ(numM, numN));
+
+// Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+// Даны два неотрицательных числа m и n.
+
+int Akkerman (int m, int n)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        bool sorted = false;
-        while(!sorted)
-        {
-            sorted = true;
-            for (int j = 0; j < array.GetLength(1)-1; j++)
-            {    
-                if (array[i,j]<array[i,j+1]) 
-                {
-                    int temp = array[i,j]; 
-                    array[i,j] = array[i,j+1];
-                    array[i,j+1] = temp; 
-                    sorted = false;            
-                }
-            }
-        }
-    }
-    return array;
-}
-
-
-int [,] mass = Create2DArray(4, 4, 10, 99);
-Show2DArray(mass);
-
-Show2DArray(SortingDown(mass));
-
-// Задача 56: Задайте прямоугольный двумерный массив. 
-// Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-
-int [,] Create2DArray (int m, int n, int minV, int maxV)
-{
-    int [,] newArray = new int [m,n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minV, maxV);
-    }
-    return newArray;
-}
-
-int [,] Show2DArray (int [,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i,j]+" ");
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-    return array;
-}
-
-void Find (int [,] array)
-{
-    int imin = 0;
-    int min = 0;
-    int sum = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {    
-            if (i == 0)
-                {    
-                sum = sum + array[i,j];
-                min = min + array[i,j];
-                }
-            else 
-                sum = sum + array[i,j];
-        }            
-        if (sum < min)
-        {
-            min = sum;
-            imin = i;
-        }
-        sum = 0;
-    }
+    if (m == 0) return n + 1;
     
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-            if (i == imin)
-            Console.Write(array[i,j]+" ");
-    }    
+    else if (m > 0 && n == 0) 
+    return Akkerman(m - 1, 1);
+    
+    else if (m > 0 && n > 0) 
+    return Akkerman(m-1, Akkerman(m, n-1));
+    
 }
 
-int [,] mass = Create2DArray(4, 6, 10, 99);
-Show2DArray(mass);
+Console.Write("Введите число M: "); 
+int numN = Convert.ToInt32(Console.ReadLine());
 
-Find(mass);
+Console.Write("Введите число N: "); 
+int numM = Convert.ToInt32(Console.ReadLine());
 
-// Задача 58: Задайте две матрицы. Напишите программу, 
-// которая будет находить произведение двух матриц.
-
-int [,] Create2DArray (int m, int n, int minV, int maxV)
-{
-    int [,] newArray = new int [m,n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-            newArray[i,j] = new Random().Next(minV, maxV);
-    }
-    return newArray;
-}
-
-int [,] Show2DArray (int [,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i,j]+" ");
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-    return array;
-}
-
-int [,] Mult (int [,] array1, int [,] array2)
-{
-    int [,] newArray = new int[array1.GetLength(0), array2.GetLength(1)];
-    for (int i = 0; i < array1.GetLength(0); i++)
-    {
-        for (int j = 0; j < array2.GetLength(1); j++)
-        {
-            
-                newArray[i,j] = array1[i,j]*array2[i,j];
-        }
-    }    
-    return newArray;
-}
-
-
-int [,] mass1 = Create2DArray(4, 4, 1, 20);
-int [,] mass2 = Create2DArray(4, 4, 1, 20);
-Show2DArray(mass1);
-Show2DArray(mass2);
-Show2DArray(Mult(mass1, mass2));
+Akkerman (numN, numM);
+Console.WriteLine();
